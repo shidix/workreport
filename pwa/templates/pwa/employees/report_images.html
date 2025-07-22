@@ -1,0 +1,33 @@
+{% load i18n %}
+
+    <div class="row m-0">
+	    <div class="col-12 bt-grey text-center pt-1 mb-3"><i class="fa fa-image orange"></i> <strong>{% trans "Fotos del parte" %}</strong><br />
+		    <span class="legend">Pulsa encima de la foto para ampliar</span></div>
+	{%for img in obj.images.all%}
+	<div class="col-4 text-center my-2"><img src="{{img.image.url}}" alt="image" class="img-service rounded" width="" onclick="abrirOriginal(this)"/><br/><br/>
+	    <a class="btn btn-danger ark" data-url="{% url "pwa-employee-report-img-remove" %}" data-target="div-images" 
+		data-obj_id="{{img.id}}" data-confirm="Está seguro/a de que desea borrar esta imagen?">
+		    <i class="fas fa-times"></i></a></div>
+	{%endfor%}
+    </div>
+
+<br/><br/>
+
+<input type="file" id="img" name="img" accept="image/*;capture=camera" class="upload"
+    data-url="{% url "pwa-employee-report-img-save" %}" data-target="div-images" data-obj-id="{{obj.id}}" 
+    data-csrf-token="{{csrf_token}}"/> <br/> <br/>
+
+{#<label for ="img" class="btn btn-smi btn-info"> <i class="fas fa-upload"></i> {% trans "Foto" %}</label>#}
+
+{#<form method="post" action="{% url "pwa-employee-report-img-save" %}" id="frmReportImg" enctype="multipart/form-data">#}
+    {#{% csrf_token %}#}
+    {#<input type="hidden" id="report" name="report" value="{{obj.id}}" />#}
+    {#<button type="submit" class="btn btn-primary-outline w-100"> <strong>{% trans "Subir imagen" %} </strong></button>#}
+{#</form>#}
+
+<script>
+  function abrirOriginal(img) {
+    // Crear una nueva ventana con la imagen en tamaño original
+    window.open(img.src, '_blank');
+  }
+</script>

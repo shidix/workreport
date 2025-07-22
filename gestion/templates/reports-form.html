@@ -1,0 +1,130 @@
+{% load i18n gestion_tags %}
+
+
+<div class="row modal-head m-0">
+    <div class="col-11"><i class="fa fa-medkit orange"></i>&nbsp; {% trans 'Parte' %} </div>
+    <div class="col-1">
+        <div class="d-flex justify-content-end"> 
+            <button type="button" class="btn btn-lg" data-bs-dismiss="modal" title="{% trans "Close" %}">
+            <i class="fas fa-times"></i></button> </div>
+    </div>
+</div>
+
+<div id="div-notification"></div>
+
+<form class="form m-0" method="GET" action="{% url "reports-form-save" %}" id="form-save">
+    {%csrf_token%}
+    <input type="hidden" id="obj_id" name="obj_id" value="{{obj.id}}" />
+    <div class="row justify-center">
+        <div class="col-6">
+            <div class="greybox-sm p-1"> {% trans "Identificador/Número de Encargo" %}
+                <input type="text" class="form-control" id="code" name="code" value="{{obj.code}}"/>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="greybox-sm p-1"> {% trans "Número de Expediente" %}
+                <input type="text" class="form-control" id="exp" name="exp" value="{{obj.exp}}"/>
+            </div>
+        </div>
+ 
+        <div class="col-6">
+            <div class="greybox-sm p-1"> {% trans "Compañía" %} 
+                <select class="form-control" id="comp" name="comp">
+                    <option value="">{% trans "-- Seleccione una aseguradora --" %}</option>
+                    {% for item in comp_list %} 
+                        <option value="{{item.id}}" {% if item == obj.comp %}selected{% endif %}>{{item.name}}</option> 
+                    {% endfor %}
+                </select>
+		        <button class="btn btn-add-aseg btn-block mt-2" onclick="$('#div-add-comp').toggle(); return false;">
+                    <i class="fas fa-plus"></i>&nbsp; {% trans 'Añadir Compañía' %} </button>
+
+                <div id="div-add-comp" style="display:none"><input id="new_comp" class="form-control mt-2"/>
+                    <button type="button" class="btn btn-save-aseg add-to-select mt-2" data-select="comp" data-input="new_comp" 
+                        data-container="div-add-comp"><i class="fa fa-save"></i>&nbsp; {% trans 'Guardar Compañía' %}</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="greybox-sm p-1"> {% trans "Estado" %}
+                <select class="form-control" id="status" name="status">
+                    <option value="">{% trans "-- Seleccione un estado --" %}</option>
+                    {% for item in status_list %} 
+                        <option value="{{item.id}}" {% if item == obj.status %}selected{% endif %}>{{item.name}}</option> 
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Dirección asegurado" %}
+                <input type="text" class="form-control" id="address" name="address" value="{{obj.address}}"/>
+            </div>
+        </div>
+ 
+        <div class="col-6 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Nombre asegurado" %}
+                <input type="text" class="form-control" id="name" name="name" value="{{obj.name}}"/>
+            </div>
+        </div>
+        <div class="col-6 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Teléfono asegurado" %}
+                <input type="text" class="form-control" id="phone" name="phone" value="{{obj.phone}}"/>
+            </div>
+        </div>
+ 
+        <div class="col-12 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Técnico" %}
+                <select class="form-control" id="employee" name="employee">
+                    <option value="">{% trans "-- Seleccione un técnico --" %}</option>
+                    {% for item in emp_list %} 
+                        <option value="{{item.id}}" {% if item == obj.employee %}selected{% endif %}>{{item.name}}</option> 
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Gremios" %}<br/>
+                {% for item in association_list %}
+                    <input type="checkbox" class="red" name="association_{{item.id}}" id="association_{{item.id}}"
+                        {%if obj|have_comp:item%}checked{%endif%}/> {{item.name}}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Descripción del servicio" %}
+                <textarea class="form-control" id="notes" name="notes">{{obj.notes}}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end p-2">
+        <button class="btn btn-primary saveform" data-bs-dismiss="modal" data-form="form-save" data-target="item-list">
+            {% trans "Guardar" %}</button>
+    </div>
+</form>
+
+<div class="row m-0 p-2"> 
+    <div class="col-10">
+        <div class="bt-grey text-center p-4"><h2> <i class="fas fa-image orange"></i> Fotos del parte</h2></div> </div>
+    <div class="col-2 text-end">
+        {% if obj %}
+            <a class="btn btn-default" href="{% url "reports-imgs-download" obj.id %}" target="_blank"> {% trans "Descargar" %}</a> 
+        {% endif %}
+    </div>
+</div>
+<div class="row m-0 p-2">
+    {% for img in obj.images.all %}
+        <div class="col-lg-2 col-4 text-center"><img src="{{img.image.url}}" class="img-service" alt="service image" 
+            title="Pulsa para ver en tamaño original" onclick="abrirOriginal(this)" /></div>
+    {% endfor %}
+</div>
+
+
+<script>
+  function abrirOriginal(img) {
+    // Crear una nueva ventana con la imagen en tamaño original
+    window.open(img.src, '_blank');
+  }
+</script>

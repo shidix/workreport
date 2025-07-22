@@ -1,0 +1,47 @@
+{% load i18n static %}
+
+<div class="content" style="border-top:1px solid #5b7898">
+    {%comment%} PC VERSION {%endcomment%}
+    <div class="d-none d-lg-block"> 
+        <div class="toolbar-content- mt-3 mb-3">
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="pathway b-right">
+                        {%trans 'Notas'%} <span id="items-counter" class="badge badge-secondary">{{notes|length}}</span></h2>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-sm ark new w-100" data-url="{%url "notes-list"%}" data-target="notes-list" 
+                        data-deleted="True"> <i class="fas fa-eye-slash"></i> {% trans 'Ver borradas' %}</button>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-sm ark new w-100" data-url="{%url "notes-list"%}" data-target="notes-list" 
+                        data-deleted="False"> <i class="fas fa-eye"></i> {% trans 'Ver activas' %}</button>
+                </div>
+                {%comment%}
+                <div class="col-2">
+                    <button type="button" class="btn btn-sm ark new w-100" data-url="{%url "notes-list"%}" data-target="notes-list" 
+                        data-deleted="False"> <i class="fas fa-eye"></i> {% trans 'Ver todas' %}</button>
+                </div>
+                {%endcomment%}
+                <div class="col-2 text-end">
+                    <button type="button" class="btn btn-sm ark new w-100" data-url="{%url "notes-form"%}" 
+                        data-target-modal="common-modal"> <i class="fas fa-plus"></i> {% trans 'Nueva Nota' %}</button>
+                </div>
+            </div>
+        </div>
+        <div id="notes-list" class="ml-list">{% include "notes/notes-list.html" %}</div>
+    </div>
+
+    {%comment%} MOBILE VERSION {%endcomment%}
+    <div class="d-lg-none"> 
+        <div class="toolbar-content mt-3 mb-3">
+            <h2 class="pathway b-right">
+                {%trans 'Notas'%} <span id="items-counter" class="badge badge-secondary">{{items|length}}</span></h2>
+
+            <div><button type="button" class="btn btn-sm ark new w-100" data-url="{%url "notes-form"%}" 
+                data-target-modal="common-modal"> <i class="fas fa-plus"></i> {% trans 'Nuevo' %}</button></div>
+        </div>
+        <div id="notes-list-mob" class="ml-list">{% include "notes/notes-list.html" %}</div>
+    </div>
+</div>
+

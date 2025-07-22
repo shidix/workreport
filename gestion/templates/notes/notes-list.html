@@ -1,0 +1,66 @@
+{% load i18n %}
+
+
+{%comment%} PC VERSION {%endcomment%}
+<div class="d-none d-lg-block"> 
+    <div class="row main-th py-3 m-0">
+        <div class="col-3"> {% trans 'Fecha' %} </div>
+        <div class="col-5"> {% trans 'Concepto' %} </div>
+        <div class="col-3"> {% trans 'Audio' %} </div>
+        <div class="col-1"></div>
+    </div>
+
+    {% for item in notes %}
+        <div class="row list-item pt-2 pb-2 m-0" id="row_{{item.id}}">
+            <div class="col-3">{{item.date|date:"d-m-Y H:i"}}</div>
+            <div class="col-5">{{item.concept}}</div>
+            <div class="col-3">
+                {% if item.audio %}
+                <audio controls>
+                    {#<source src="horse.ogg" type="audio/ogg">#}
+                    <source src="{{item.audio.url}}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                {% endif %}
+            </div>
+            <div class="col-1 text-right">
+                <a class="btn btn-xs ark" data-url="{% url "notes-form" %}" data-target-modal="common-modal" 
+                    data-obj_id="{{item.id}}" title="{% trans 'Editar' %}"><i class="fas fa-edit"></i></a> 
+                {% if item.deleted %}
+                    <a class="btn btn-xs ark" data-url="{% url "notes-remove" %}" data-target="notes-list" data-obj_id="{{item.id}}" 
+                        title="{%trans 'Borrar'%}" 
+                        data-confirm="{%trans "Está seguro/a de que desea borrar este elemento definitivamente?"%}">
+                        <i class="fas fa-trash"></i></a> 
+                {% else %}
+                    <a class="btn btn-xs ark" data-url="{%url "notes-remove-soft"%}" data-target="notes-list" data-obj_id="{{item.id}}"
+                        title="{%trans 'Borrar'%}" data-confirm="{%trans "Está seguro/a de que desea borrar este elemento?"%}">
+                        <i class="fas fa-trash"></i></a> 
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{%comment%} MOBILE VERSION {%endcomment%}
+<div class="d-lg-none"> 
+    {% for item in item_list %}
+        <div class="row list-item-cl pt-2 pb-2 m-0" id="row_{{item.id}}">
+            <div class="col-12"> <small><i class="fas fa-tools orange"></i> {% trans 'Fecha' %}</small> 
+                <br /> <strong>{{item.date|date:"d-m-Y H:i"}}</strong></div>
+            <div class="col-6 mt-3"> <small><i class="fas fa-user orange"></i> {% trans 'Concepto' %}</small> 
+                <br /> <strong>{{item.concept}}</strong></div>
+            <div class="col-5 mt-2">
+                <button type="button" class="btn btn-primary-outline ark w-100" data-url="{% url "notes-form" %}" 
+                    data-target-modal="common-modal" data-obj_id="{{item.id}}" title="{% trans 'Editar' %}"><small>Editar</small>
+                </button> 
+            </div>
+            <div class="col-5 offset-2 mt-2">
+                <button type="button" class="btn btn-outline-danger ark w-100" data-url="{% url "notes-remove" %}" 
+                    data-target="item-list" data-obj_id="{{item.id}}" title="{% trans 'Borrar' %}" 
+                    data-confirm="{% trans "Are you sure to remove this element?" %}"><small>Borrar</small></button> 
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+

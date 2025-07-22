@@ -1,0 +1,319 @@
+/*********** UTILS *************/
+.text-white {
+    color: #ffffff; 
+}
+.tiny {
+    font-size:0.6em; 
+    color: #000000;
+}
+.medium {
+    font-size:0.8em;
+}
+.huge {
+    font-size:1.4em;
+}
+.light-grey{ 
+    background: #cccccc;
+}
+.dark-grey{ 
+    background: #999999;
+}
+.w-100 {
+    width:100%;
+}
+.h-100 {
+    height:100%;
+}
+.p-0 {
+    padding:0px;
+}
+
+.orange {
+    color: #03aecc;
+}
+
+h3 {
+    color: #333333;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+
+input.pin {
+    border: 1px solid #ced4da;
+    font-size: 1.2rem;;
+}
+input#img {
+    font-size: 0.8rem;
+}
+
+.nav-bar {   
+    background: #beecf4;
+    color: #113d4a;
+}
+
+.rounded {
+    border-radius: 15px !important;
+}
+
+/*********** END UTILS *************/
+
+
+/*********** BUTTONS *************/
+
+.bg-success.ipp { 
+	background-color: #82bc00 !important;
+	border:1px solid #82bc00 !important;
+}
+.btn-success.ipp { 
+    background: #3b693a;
+    border:1px solid #3b693a;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.btn-light.ipp { 
+    background: #ffffff;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+.btn.btn-danger.ipp {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.btn-primary {
+    background-color: #03aecc !important;
+    border:1px solid #03aecc !important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.btn-primary-outline {
+    border:1px solid #03aecc !important;
+    color: #03aecc !important;
+}
+
+
+/*********** END BUTTONS *************/
+
+/*********** HEADER *************/
+.header {
+    background: #ffffff; 
+    color: #ffffff; 
+    font-weight: 600;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+img.logo {
+    height:50px; 
+    width:auto;
+}
+
+img.img-service {
+	height:120px; 
+	cursor:pointer;
+	border:1px solid #03aecc; 
+	border-radius: 0.25rem;
+	box-shadow: 0 1px 8px 0 rgb(0 0 0 / 12%), 0 2px 3px -1px rgb(0 0 0 / 20%);
+}
+img.img-service {
+	height:100px;
+	width: 100%;
+       object-fit: contain !important;
+	cursor:pointer;
+	border:1px solid #03aecc; 
+	border-radius: 0.25rem;
+	box-shadow: 0 1px 8px 0 rgb(0 0 0 / 12%), 0 2px 3px -1px rgb(0 0 0 / 20%);
+}
+
+span.legend {
+	font-style: italic;
+	font-size: 0.8rem;
+	color: #666;
+}
+
+.bt-grey {
+    border-top: 2px dashed #03aecc;
+}
+
+.status-bar-login { 
+    background: #e35000; 
+    border-radius: 0px 0px 0px 50px;
+    color: #ffffff; 
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.status-bar { 
+    background: #f6303f; 
+    border-radius: 0px 0px 10px 10px;
+    color: #ffffff;
+    font-size: 0.75rem;
+    height: 20px;
+    line-height: 1.8;
+    text-transform: uppercase;
+}
+.status-bar span { 
+    font-size: 0.73rem;
+    line-height: 1.3;
+}
+
+.cabecera {
+    background: #ffffff; 
+}
+.powericon {
+    background: #ffffff;
+    border:none;
+    font-size: 1.5rem;
+}
+.detail-bar { 
+    border-bottom:1px solid #aaa; 
+    color: #ffffff; 
+    background: #e1bee7; 
+}
+
+/*********** END HEADER *************/
+
+
+
+/*********** CONTENT *************/
+
+body {
+    background: #fff;
+}
+
+.container-fluid {
+    padding: 0 !important;
+}
+
+.content {
+    color:#333;
+}
+.content {
+    padding-bottom:50px;
+}
+
+.welcome {
+    font-size: 0.7rem;
+    color: #666666;
+}
+
+.employee-name {
+    font-size: 0.8rem;
+    color: #999;
+    text-transform: Capitalize;
+}
+
+a.asm {
+    text-decoration:none; 
+    color: #ffffff; 
+}
+.column-btns {
+    display:inline-block; 
+    padding:0px !important;
+    text-align:right;
+}
+.column-btns-01, .column-btns-02, .column-btns-03 {
+    display:inline-block; 
+    vertical-align: top;
+}
+
+.service-status {
+    color: #fff !important;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+i.fa.fa-arrow-circle-right {
+    font-size: 1.2rem;
+}
+.status-name {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.flap {
+    align-items: center; 
+    font-size: 1.8rem;
+    text-align: center; 
+    display: grid;
+}
+
+/*********** CLIENT INFO *************/
+
+.info-client,
+.info-service {
+    color: #000;
+}
+
+
+/*********** QR *************/
+
+.reader { 
+    border: none !important;
+    width: 100%;
+}
+
+button.html5-qrcode-element {
+    font-weight: 600;
+    font-size: 1.2rem !important;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    padding: 0.75rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: #fff !important;
+    border: 1px solid #3b693a !important;
+    color: #3b693a !important;
+    
+    margin-top: 30px !important;
+}
+
+span.html5-qrcode-element {
+    text-decoration: none !important;
+    color: #e35000;
+}
+
+p.info {
+    background-color: #f8d8b9;
+    color: #333;
+}
+p.name {
+    text-align:center;
+    text-transform: Capitalize;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #f2902d;
+}
+p.date {
+    color: #333 !important;
+}
+
+/*********** END QR *************/
+
+
+/*********** END CONTENT *************/
+
+/******* FOOTER *************/
+.footer {
+    position:fixed; 
+    background-color:#f5f5f5;
+    color:#999999; 
+    bottom:0px; 
+    height:50px;
+    font-size:0.7em;
+    align-items: center;
+}
+/*********** END FOOTER *************/

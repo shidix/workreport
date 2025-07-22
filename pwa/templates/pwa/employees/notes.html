@@ -1,0 +1,31 @@
+{% extends "pwa-base.html" %}
+{% load static i18n gestion_tags %}
+
+{% block content%}
+    <div class="row m-0 py-3 text-center">
+        <div class="col-6"><a class="btn btn-primary w-100 py-3" href="{% url "pwa-employee-note" %}">Nueva Nota</a></div>
+        <div class="col-6"><a class="btn btn-primary w-100 py-3" href="{% url "pwa-employee" %}">Volver</a></div>
+    </div>
+    <div class="nav-bar text-center p-2"><strong>NOTAS</strong></div>
+    {% for item in notes_list %}
+        <div class="card mt-3"><div class="card-body border-secondary">
+            <div class="row">
+                <div class="col-6 text-start px-0">
+                    <i class="fa fa-clock-o orange"></i><strong> {{item.date|date:"d-m-Y"}}</strong></div>
+                <div class="col-6 text-end px-0"><strong><small> {{item.date|date:"H:i"}}</small></strong></div>
+                <div class="col-12 text-start pt-2 px-0">{{item.concept}}</div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    {% if item.audio %}
+                        <audio controls class="w-100">
+                            {#<source src="horse.ogg" type="audio/ogg">#}
+                            <source src="{{item.audio.url}}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% endif %}
+                </div>
+            </div>
+        </div> </div>
+    {% endfor %}
+{% endblock %}

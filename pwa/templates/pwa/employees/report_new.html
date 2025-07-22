@@ -1,0 +1,72 @@
+{% extends "pwa-base.html" %}
+{% load i18n %}
+
+{% block content%}
+    <div class="nav-bar text-center p-2"><strong>NUEVO SERVICIO</strong></div>
+    <div class="row info-service m-0 py-2">
+        <form method="post" action="{% url "pwa-employee-report-new-save" %}" id="frmService" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" id="obj_id" name="obj_id" value="{{obj.id}}" />
+
+            {%comment%}
+            <i class="fa fa-info-circle orange"></i> <strong>{% trans "Tipo de servicio" %}</strong><br />
+            <select class="form-control" id="report_type" name="report_type">
+                <option value="">{% trans "--Seleccione un tipo--" %}</option>
+                {% for item in type_list %} 
+                    <option value="{{item.id}}" {%if item == obj.report_type%}selected{%endif%}>{{item.name}}</option> 
+                {% endfor %}
+            </select> <br/>
+            {%endcomment%}
+            <i class="fas fa-user orange"></i> <strong>{% trans "Nombre" %}</strong><br />
+            <textarea class="form-control" id="name" name="name" placeholder="{%trans "Nombre..."%}"> {{obj.name}}</textarea> 
+            <br/>
+ 
+            <i class="fas fa-user orange"></i> <strong>{% trans "Teléfono" %}</strong><br />
+            <textarea class="form-control" id="phone" name="phone" placeholder="{%trans "Teléfono..."%}"> {{obj.phone}}</textarea> 
+            <br/>
+
+            <i class="fas fa-user orange"></i> <strong>{% trans "Dirección" %}</strong><br />
+            <textarea class="form-control" id="address" name="address" placeholder="{%trans "Dirección..."%}">{{obj.adress}}</textarea>
+            <br/>
+
+            <i class="fa fa-info-circle orange"></i> <strong>{% trans "Estado" %}</strong><br />
+            <select class="form-control" id="status" name="status">
+                <option value="">{% trans "--Seleccione un estado--" %}</option>
+                {% for item in status_list %} 
+                    <option value="{{item.id}}" {%if item == obj.status%}selected{%endif%}>{{item.name}}</option> 
+                {% endfor %}
+            </select> <br/>
+
+            {%comment%}
+            <i class="fa fa-info-circle orange"></i> <strong>{% trans "Cliente" %}</strong><br />
+            <select class="form-control" id="client" name="client">
+                <option value="">{% trans "--Seleccione un cliente--" %}</option>
+                {% for item in client_list %} 
+                    <option value="{{item.id}}" {%if item == obj.client%}selected{%endif%}>{{item.name}}</option> 
+                {% endfor %}
+            </select> <br/>
+            {%endcomment%}
+
+            <i class="fa fa-info-circle orange"></i> <strong>{% trans "Técnico" %}</strong><br />
+            <select class="form-control" id="employee" name="employee">
+                <option value="">{% trans "--Seleccione un empleado--" %}</option>
+                {% for item in employee_list %} 
+                    <option value="{{item.id}}" {%if item == obj.employee%}selected{%endif%}>{{item.name}}</option> 
+                {% endfor %}
+            </select> <br/>
+
+            <i class="fas fa-thumbtack orange"></i> <strong>{% trans "Notas" %}</strong><br />
+            <textarea class="form-control" id="notes" name="notes" placeholder="{%trans "Descripción..."%}"> {{obj.notes}}</textarea> 
+            <br/>
+
+            <i class="fa fa-image orange"></i> <strong>{% trans "Fotos" %}</strong><br />
+            {%for img in obj.images.all%}<img src="{{img.image.url}}" alt="image" class="rounded" width="33%"/>{%endfor%}<br/><br/>
+            <input type="file" id="img" name="img" accept="image/*;capture=camera" /> <br/> <br/>
+
+            <div class="row">
+                <div class="col-6"><input type="submit" class="btn btn-primary w-100 py-3" value="{% trans "Enviar" %}"/></div>
+                <div class="col-6"><a class="btn btn-primary w-100 py-3" href="{% url "pwa-employee" %}">Volver</a></div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

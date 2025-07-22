@@ -1,0 +1,36 @@
+{% extends "pwa-base.html" %}
+{% load static i18n gestion_tags %}
+
+{% block content%}
+    {% if request.user|in_group:"admins"%}
+        <div class="my-3 text-center"><a class="btn btn-primary w-100 py-3" href="{% url "pwa-employee-notes" %}">Ver Notas</a></div>
+    {% endif %}
+
+    {%comment%}
+    <div class="my-3 text-center"><a class="btn btn-primary w-100 py-3" href="{% url "pwa-employee-report-new" %}">
+        Nuevo servicio</a></div>
+    {%endcomment%}
+
+    <div class="nav-bar text-center p-2"><strong>PARTES</strong></div>
+    {% for item in obj.reports.all %}
+        {#<div class="row m-0 mt-3">#}
+        <div class="card mt-3 p-0"><div class="card-body p-0">
+            <a class="report-status- btn w-100 p-0" href="{% url "pwa-employee-report" item.id %}">
+                {#style="background:{{item.status.color}}">#}
+                <div class="row m-0">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-8 text-start ext-white pt-2"><strong>{{item.code}}</strong></div>
+                            <div class="col-4 text-end ext-white status-name pt-2"><strong>{{item.status.name}}</strong></div>
+                            <div class="col-8 text-start"><small>{{item.name}}</small></div>
+                            <div class="col-4 text-end"><small>{{item.phone}}</small></div>
+                            <div class="col-12 text-start pt-2"><small>{{item.address}}</small></div>
+                        </div>
+                    </div>
+                    <div class="col-1 flap text-center text-white" style="background:{{item.status.color}}">
+                        <i class="fa fa-angle-right"></i></div>
+                </div>
+            </a>
+        </div> </div>
+    {% endfor %}
+{% endblock %}

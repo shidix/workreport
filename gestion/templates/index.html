@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block central_content %}
+    <div class="row toolbar-search p-2 m-0">{% include "reports-search.html" %} </div>
+    <div class="content mt-4">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs mx-2 pt-2">
+                <li class="nav-item"> <a class="nav-link {%if not current_tab or current_tab == ""%}active{%endif%}" 
+                    data-bs-toggle="tab" href="#reports"> {% trans "Partes" %}</a> </li>
+                {%comment%}
+                <li class="nav-item"> <a class="nav-link {%if current_tab == "notes"%}active{%endif%}" data-bs-toggle="tab" 
+                    href="#notes"> {%trans "Notas"%}</a> </li>
+                {%endcomment%}
+                </ul>
+                <div class="tab-content internal mx-2">
+                {# -------------------------- SERVICES ------------------------#}
+                <div class="tab-pane {%if not current_tab or current_tab == ""%}active{%endif%} m-0" id="reports">
+                    <div id="div-reports"> {% include "reports.html" %}</div></div>
+
+                {%comment%}
+                {# -------------------------- NOTES ------------------------#}
+                <div class="tab-pane {%if current_tab == "notes"%}active{%endif%} m-0" id="notes"><div id="div-notes">
+                    {% include "notes/notes.html" %}</div></div>
+                </div>
+                {%endcomment%}
+                {% include "common-modal.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock central_content %}

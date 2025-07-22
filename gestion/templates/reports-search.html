@@ -1,0 +1,80 @@
+{% load i18n gestion_tags %}
+
+<form class="form m-0" method="GET" action="{% url "reports-search" %}" id="form-search">
+    {%csrf_token%}
+    <div class="row mb-4">
+        <div class="col-lg-2 py-2 text-end d-none d-lg-block"> <span>{% trans "Número de expediente:" %}</span> </div>
+        <div class="col-lg-2 col-3">
+            <input type="text" class="form-control form-control-dark w-100 py-2" name="s_exp" id="s_exp" 
+                placeholder="Número de expediente" value="{{request.session.s_exp}}"/>
+        </div>
+        <div class="col-lg-2 py-2 text-end d-none d-lg-block"> <span>{% trans "Identificador/Número de encargo:" %}</span> </div>
+        <div class="col-lg-2 col-3">
+            <input type="text" class="form-control form-control-dark w-100 py-2" name="s_code" id="s_code" 
+                placeholder="Identificador / Número de encargo" value="{{request.session.s_code}}"/>
+        </div>
+        <div class="col-lg-1 py-2 text-end d-none d-lg-block"> <span>{% trans "Estado:" %}</span> </div>
+        <div class="col-lg-3 col-3 b-search-">
+            <select class="form-control form-control-dark w-100 py-2" id="s_status" name="s_status">
+                <option value="">{% trans "-- Seleccione --" %}</option>
+                {% for s in status_list %} 
+                    <option value="{{s.id}}" {%if s.id == request.session.s_status%}selected{%endif%}>{{s.name}}</option> 
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-lg-2 py-2 text-end d-none d-lg-block"> <span>{% trans "Fechas:" %}</span> </div>
+        <div class="col-lg-1 col-2 p-0">
+            <input type="date" class="form-control form-control-dark w-100 py-2" name="s_idate" id="s_idate" 
+                value="{{request.session.s_idate}}"/>
+        </div>
+        <div class="col-lg-1 col-2 p-0">
+            <input type="date" class="form-control form-control-dark w-100 py-2" name="s_edate" id="s_edate" 
+                value="{{request.session.s_edate}}"/>
+        </div>
+        <div class="col-lg-2 py-2 text-end d-none d-lg-block"> <span>{% trans "Técnico:" %}</span> </div>
+        <div class="col-lg-2 col-3">
+            <input type="text" class="form-control form-control-dark w-100 py-2" name="s_name" id="s_name" 
+                placeholder="Técnico" value="{{request.session.s_name}}"/>
+        </div>
+        <div class="col-lg-1 py-2 text-end d-none d-lg-block"> <span>{% trans "Compañía:" %}</span> </div>
+        <div class="col-lg-3 col-3 b-search-">
+            <select class="form-control form-control-dark w-100 py-2" id="s_comp" name="s_comp">
+                <option value="">{% trans "-- Seleccione --" %}</option>
+                {% for c in comp_list %} 
+                    <option value="{{c.id}}" {%if c.id == request.session.s_comp%}selected{%endif%}>{{c.comp}}</option> 
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-default saveform w-25 border-secondary" data-form="form-search" data-target="item-list">
+                <i class="fas fa-search"></i> {% trans "Buscar" %}</button>
+        </div>
+    </div>
+</form>
+        {%comment%}
+        <div class="col-1 py-2 text-end d-none d-lg-block"> <span>{% trans "Cobrado:" %}</span> </div>
+        <div class="col-1">
+            <select class="form-control form-control-dark w-100 py-2" id="s_charged" name="s_charged">
+                <option value="">{% trans "Todos" %}</option>
+                <option value="0" {%if request.session.s_charged == "0"%}selected{%endif%}>{% trans "No cobrados" %}</option>
+                <option value="1" {%if request.session.s_charged == "1"%}selected{%endif%}>{% trans "Cobrados" %}</option>
+            </select>
+        </div>
+
+        <div class="col-1 py-2 text-end d-none d-lg-block"> <span>{% trans "Tipo:" %}</span> </div>
+        <div class="col-1">
+            <select class="form-control form-control-dark w-100 py-2" id="s_type" name="s_type">
+                <option value="">{% trans "-- Seleccione --" %}</option>
+                {% for t in type_list %}
+                    <option value="{{t.id}}" {%if t.id == request.session.s_type%}selected{%endif%}>{{t.name}}</option> 
+                {% endfor %}
+            </select>
+        </div>
+        {%endcomment%}
+

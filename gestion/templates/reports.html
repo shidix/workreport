@@ -1,0 +1,28 @@
+{% load i18n static %}
+
+<div class="content" style="border-top:1px solid #5b7898">
+    {%comment%} PC VERSION {%endcomment%}
+    <div class="d-none d-lg-block"> 
+        <div class="toolbar-content mt-3 mb-3">
+            <h2 class="pathway b-right">
+                {%trans 'Partes'%} <span id="items-counter" class="badge badge-secondary">{{item_list|length}}</span></h2>
+
+            <div><button type="button" class="btn btn-sm ark new w-100" data-url="{%url "reports-form"%}" 
+                data-target-modal="common-modal"> <i class="fas fa-plus"></i> {% trans 'Nuevo Parte' %}</button></div>
+        </div>
+        <div id="item-list" class="ml-list">{% include "reports-list.html" %}</div>
+    </div>
+
+    {%comment%} MOBILE VERSION {%endcomment%}
+    <div class="d-lg-none"> 
+        <div class="toolbar-content mt-3 mb-3">
+            <h2 class="pathway b-right">
+                {%trans 'Partes'%} <span id="items-counter" class="badge badge-secondary">{{item_list|length}}</span></h2>
+
+            <div><button type="button" class="btn btn-sm ark new w-100" data-url="{%url "reports-form"%}" 
+                data-target-modal="common-modal"> <i class="fas fa-plus"></i> {% trans 'Nuevo' %}</button></div>
+        </div>
+        <div id="item-list" class="ml-list">{% include "reports-list.html" %}</div>
+    </div>
+</div>
+

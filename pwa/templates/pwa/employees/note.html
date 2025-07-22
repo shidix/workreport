@@ -1,0 +1,17 @@
+{% extends "pwa-base.html" %}
+{% load i18n %}
+
+{% block content%}
+    <div class="row info-service m-0 py-2">
+        <form method="post" action="{% url "pwa-employee-note-save" %}" id="frmService" enctype="multipart/form-data">
+            {% csrf_token %}
+            <i class="fa fa-file-text orange"></i> <strong>{% trans "Concepto" %}</strong><br />
+            <textarea class="form-control" id="concept" name="concept" placeholder="{%trans "Concepto..."%}">{{obj.concept}}</textarea>
+            <br/>
+            <i class="fas fa-microphone orange"></i> <strong>{% trans "Audio" %}</strong><br />
+            <input type="file" id="audio" name="audio" accept="audio/*;capture=microphone" />
+            <br/> <br/>
+            <input type="submit" class="btn btn-primary w-100 py-3" value="{% trans "Enviar" %}"/>
+        </form>
+    </div>
+{% endblock %}
