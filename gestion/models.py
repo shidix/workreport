@@ -95,12 +95,18 @@ class Client(models.Model):
 class InsuranceComp(models.Model):
     name = models.CharField(max_length=255, verbose_name = _('Nombre'), default="")
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = _('Compañía de seguro')
         verbose_name_plural = _('Compañías de seguros')
 
 class Association(models.Model):
     name = models.CharField(max_length=255, verbose_name = _('Nombre'), default="")
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = _('Gremio')

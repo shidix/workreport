@@ -44,7 +44,7 @@
             <select class="form-control form-control-dark w-100 py-2" id="s_comp" name="s_comp">
                 <option value="">{% trans "-- Seleccione --" %}</option>
                 {% for c in comp_list %} 
-                    <option value="{{c.id}}" {%if c.id == request.session.s_comp%}selected{%endif%}>{{c.comp}}</option> 
+                    <option value="{{c.id}}" {%if c.id == request.session.s_comp%}selected{%endif%}>{{c.name}}</option> 
                 {% endfor %}
             </select>
         </div>
