@@ -175,3 +175,5 @@ cython_debug/
 
 migrations
 collect_static
+README.md
+media
