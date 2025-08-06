@@ -29,7 +29,8 @@ def get_reports(request):
     code = get_session(request, "s_code")
     status = get_session(request, "s_status")
     comp = get_session(request, "s_comp")
-    value = get_session(request, "s_name")
+    emp = get_session(request, "s_emp")
+    #value = get_session(request, "s_name")
     i_date = datetime.strptime("{} 00:00".format(get_session(request, "s_idate")), "%Y-%m-%d %H:%M")
     e_date = datetime.strptime("{} 23:59".format(get_session(request, "s_edate")), "%Y-%m-%d %H:%M")
 
@@ -38,10 +39,12 @@ def get_reports(request):
         kwargs["exp"] = exp
     if code != "":
         kwargs["code"] = code
-    if value != "":
-        kwargs["employee__name__icontains"] = value
+    #if value != "":
+    #    kwargs["employee__name__icontains"] = value
     if status != "":
         kwargs["status__id"] = status
+    if emp != "":
+        kwargs["employee__id"] = emp
     if comp != "":
         kwargs["comp__id"] = comp
     #if s_type != "":
@@ -60,6 +63,7 @@ def index(request):
         "item_list": get_reports(request), 
         "notes": get_notes(request), 
         "association_list": Association.objects.all(),
+        "emp_list": Employee.objects.all(),
         "comp_list": InsuranceComp.objects.all(),
         "status_list": ReportStatus.objects.all()
     }
@@ -73,7 +77,8 @@ def reports_list(request):
 def reports_search(request):
     set_session(request, "s_exp", get_param(request.GET, "s_exp"))
     set_session(request, "s_code", get_param(request.GET, "s_code"))
-    set_session(request, "s_name", get_param(request.GET, "s_name"))
+    #set_session(request, "s_name", get_param(request.GET, "s_name"))
+    set_session(request, "s_emp", get_param(request.GET, "s_emp"))
     set_session(request, "s_idate", get_param(request.GET, "s_idate"))
     set_session(request, "s_edate", get_param(request.GET, "s_edate"))
     set_session(request, "s_status", get_param(request.GET, "s_status"))

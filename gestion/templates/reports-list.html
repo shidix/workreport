@@ -17,7 +17,7 @@
         <div class="row list-item-cl pt-2 pb-2 m-0" id="row_{{item.id}}">
             <div class="col-2"><i class="fa fa-wrench orange"></i> {{item.code}}</div>
             <div class="col-2"><i class="fa fa-file orange"></i> {{item.exp}}</div>
-            <div class="col-2"><i class="fas fa-calendar orange"></i> {{item.date|date:"d-m-Y H:i"}}</div>
+            <div class="col-2"><i class="fas fa-calendar orange"></i> {{item.local_date|date:"d-m-Y H:i"}}</div>
             <div class="col-2"><i class="fas fa-user orange"></i> {{item.name}} </div>
 	        <div class="col-2"><i class="fas fa-phone orange"></i> {{item.phone}}</div>
             <div class="col-1 pt-2"><span class="status-service" style="background:{{item.status.color}}">

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.db import models
 from django.utils.translation import gettext_lazy as _ 
 
+from dateutil import tz
 import datetime
 
 
@@ -145,6 +146,10 @@ class Report(models.Model):
     #service_type = models.ForeignKey(ServiceType, verbose_name=_('Tipo de servicio'), on_delete=models.SET_NULL, null=True)
     #client = models.ForeignKey(Client, verbose_name=_('Cliente'), on_delete=models.SET_NULL, null=True, related_name="services")
     employee = models.ForeignKey(Employee,verbose_name=_('Empleado'),on_delete=models.SET_NULL,null=True,related_name="reports")
+
+    @property
+    def local_date(self):
+        return self.date.astimezone(tz.gettz("Atlantic/Canary"))
 
     def have_comp(self, comp):
         comp_list = [item.association for item in self.associations.all()]

@@ -22,9 +22,14 @@
                         <div class="row">
                             <div class="col-8 text-start ext-white pt-2"><strong>{{item.code}}</strong></div>
                             <div class="col-4 text-end ext-white status-name pt-2"><strong>{{item.status.name}}</strong></div>
-                            <div class="col-8 text-start"><small>{{item.name}}</small></div>
-                            <div class="col-4 text-end"><small>{{item.phone}}</small></div>
-                            <div class="col-12 text-start pt-2"><small>{{item.address}}</small></div>
+                            <div class="col-4 text-start fst-italic"><small>{% trans "Teléfono" %}:</small></div>
+                            <div class="col-8 text-end"><small>{{item.phone}}</small></div>
+                            <div class="col-4 text-start fst-italic"><small>{% trans "Fecha" %}:</small></div>
+                            <div class="col-8 text-end"><small>{{item.date|date:"d-m-Y"}}</small></div>
+                            <div class="col-4 text-start fst-italic"><small>{% trans "Cliente" %}:</small></div>
+                            <div class="col-8 text-end"><small>{{item.name}}</small></div>
+                            <div class="col-4 text-start fst-italic"><small>{% trans "Dirección" %}</small></div>
+                            <div class="col-8 text-end"><small>{{item.address}}</small></div>
                         </div>
                     </div>
                     <div class="col-1 flap text-center text-white" style="background:{{item.status.color}}">
