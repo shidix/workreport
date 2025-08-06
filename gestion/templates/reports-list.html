@@ -59,12 +59,17 @@
 <div class="d-lg-none"> 
     {% for item in item_list %}
     <div class="row list-item-cl pt-2 pb-2 m-0" id="row_{{item.id}}">
-        <div class="col-6"> <small><i class="fas fa-tools orange"></i> {% trans 'Identificador/Número de Encargo' %}</small> <strong>{{item.code}}</strong></div>
-        <div class="col-6"> <small><i class="fas fa-user orange"></i> {% trans 'Fecha' %}</small> <strong>{{item.date|date:"d-m-Y H:i"}}</strong></div>
-        <div class="col-12 mt-3"> <small><i class="fas fa-user orange"></i> {% trans 'Cliente' %} </small> <strong>{{item.name}}</strong> </div>
-        <div class="col-12 mt-3"> <small><i class="fas fa-info-circle orange"></i> {% trans 'Compañía' %} </small> <strong>{{item.comp.name}}</strong> </div>
-	<div class="col-6 mt-3"> <small><i class="fas fa-traffic-light orange"></i> {% trans 'Estado' %} </small> </div>
-	<div class="col-6 mt-3 text-end"><strong><span class="status-service-mv" style="background:{{item.status.color}}">{{item.status.name}}</span></strong> </div>
+        <div class="col-6"> <small><i class="fas fa-tools orange"></i> {% trans 'Identificador/Número de Encargo' %}</small> 
+            <strong>{{item.code}}</strong></div>
+        <div class="col-6"> <small><i class="fas fa-user orange"></i> {% trans 'Fecha' %}</small> 
+            <strong>{{item.local_date|date:"d-m-Y H:i"}}</strong></div>
+        <div class="col-12 mt-3"> <small><i class="fas fa-user orange"></i> {% trans 'Cliente' %} </small> 
+            <strong>{{item.name}}</strong> </div>
+        <div class="col-12 mt-3"> <small><i class="fas fa-info-circle orange"></i> {% trans 'Compañía' %} </small> 
+            <strong>{{item.comp.name}}</strong> </div>
+	    <div class="col-6 mt-3"> <small><i class="fas fa-traffic-light orange"></i> {% trans 'Estado' %} </small> </div>
+	    <div class="col-6 mt-3 text-end"><strong><span class="status-service-mv" style="background:{{item.status.color}}">
+            {{item.status.name}}</span></strong> </div>
         <div class="col-5 mt-3">
             <button type="button" class="btn btn-primary-outline ark w-100" data-url="{% url "reports-form" %}" 
                 data-target-modal="common-modal" data-obj_id="{{item.id}}" title="{% trans 'Editar' %}"><small>Editar</small></button> 
