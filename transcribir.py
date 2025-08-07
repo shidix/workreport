@@ -2,7 +2,7 @@ import whisper
 import sys
 import os
 import requests
-PATH = "/var/www/django/workreport/"
+PATH = "/srv/docker/ctc2012/app/"
 
 # Verificar que se proporcionó un archivo como argumento
 if len(sys.argv) != 3:
@@ -38,7 +38,7 @@ model = whisper.load_model("base")  # Puedes usar "tiny", "base", "small", "medi
 result = model.transcribe(audio_file, language="es")
 
 #print("Sending...")
-res = requests.post("https://workreport.shidix.es/gestion/set-note-concept", headers={"Accept": "application/txt"}, data={"token": "1234", "text": result["text"], "report": obj_id})
+res = requests.post("https://www.ctc2012grupo.com/gestion/set-note-concept", headers={"Accept": "application/txt"}, data={"token": "1234", "text": result["text"], "report": obj_id})
 # Guardar la transcripción en el archivo de salida
 #print(res)
 #with open(output_file, "w", encoding="utf-8") as file:
