@@ -177,3 +177,4 @@ migrations
 collect_static
 README.md
 media
+*.sh
