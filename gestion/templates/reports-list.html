@@ -34,7 +34,9 @@
                 {{item.comp.name}} </div>
             <div class="col-3 bt-grey mt-2 pt-2"><i class="fa fa-user orange"></i> <strong>{% trans 'Técnico' %}:</strong> <br />
                 {{item.employee.name}} </div>
-            <div class="col-6 bt-grey mt-2 pt-2"><i class="fa fa-cog orange"></i> <strong>{% trans 'Gremios' %}:</strong> <br />
+            <div class="col-3 bt-grey mt-2 pt-2"><i class="fa fa-user orange"></i> <strong>{% trans 'Fecha visita' %}:</strong> <br />
+                {{item.emp_date|date:"d-m-Y H:i"}} </div>
+            <div class="col-3 bt-grey mt-2 pt-2"><i class="fa fa-cog orange"></i> <strong>{% trans 'Gremios' %}:</strong> <br />
                 {%for item in item.associations.all%}{{item.association.name}} {%if not forloop.last%}-{%endif%} {%endfor%}</div>
             <div class="col-6 bt-grey mt-2 pt-2"><i class="fa fa-globe orange"></i> <strong>{% trans 'Dirección' %}:</strong> <br />
                 {{item.address}}</div>
