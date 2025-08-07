@@ -13,7 +13,7 @@ from workreport.decorators import group_required
 from workreport.commons import get_float, get_or_none, get_param, get_session, set_session, show_exc, generate_qr, csv_export
 from .models import Employee, Client, Report, ReportStatus, ReportAssociation, Note, InsuranceComp, Association
 
-ACCESS_PATH="https://workreport.shidix.es/gestion/reports/client/"
+ACCESS_PATH="{}/gestion/assistances/client/".format(settings.MAIN_URL)
 
 
 def init_session_date(request, key, days=0):
@@ -52,7 +52,7 @@ def get_reports(request):
     #if charged == "1":
     #    kwargs["charged"] = True
 
-    print(kwargs)
+    # print(kwargs)
     return Report.objects.filter(**kwargs).order_by("-date")
 
 @group_required("admins",)
@@ -101,34 +101,43 @@ def reports_form(request):
 
 @group_required("admins",)
 def reports_form_save(request):
-    obj = get_or_none(Report, get_param(request.GET, "obj_id"))
-    if obj == None:
-        obj = Report.objects.create()
-    comp_val = get_param(request.GET, "comp")
-    comp = get_or_none(InsuranceComp, comp_val)
-    if comp == None and not comp_val.isdigit():
-        comp = InsuranceComp.objects.create(name=comp_val)
-    association = get_or_none(Association, get_param(request.GET, "association"))
-    status = get_or_none(ReportStatus, get_param(request.GET, "status"))
-    emp = get_or_none(Employee, get_param(request.GET, "employee"))
+    try:
+        obj = get_or_none(Report, get_param(request.GET, "obj_id"))
+        isNew = False
+        if obj == None:
+            obj = Report.objects.create()
+            isNew = True
+        comp_val = get_param(request.GET, "comp")
+        comp = get_or_none(InsuranceComp, comp_val)
+        if comp == None and not comp_val.isdigit():
+            comp = InsuranceComp.objects.create(name=comp_val)
+        association = get_or_none(Association, get_param(request.GET, "association"))
+        status = get_or_none(ReportStatus, get_param(request.GET, "status"))
+        emp = get_or_none(Employee, get_param(request.GET, "employee"))
 
-    obj.code = get_param(request.GET, "code")
-    obj.exp = get_param(request.GET, "exp")
-    obj.name = get_param(request.GET, "name")
-    obj.phone = get_param(request.GET, "phone")
-    obj.address = get_param(request.GET, "address")
-    obj.association = association
-    obj.comp = comp
-    obj.status = status
-    obj.employee = emp
-    obj.notes = get_param(request.GET, "notes")
-    obj.save()
+        obj.code = get_param(request.GET, "code")
+        obj.exp = get_param(request.GET, "exp")
+        obj.name = get_param(request.GET, "name")
+        obj.phone = get_param(request.GET, "phone")
+        obj.address = get_param(request.GET, "address")
+        obj.association = association
+        obj.comp = comp
+        obj.status = status
+        obj.employee = emp
+        obj.notes = get_param(request.GET, "notes")
+        emp_date = get_param(request.GET, "emp_date")
+        emp_time = get_param(request.GET, "emp_time")
+        obj.emp_date = datetime.strptime("{} {}".format(emp_date, emp_time), "%Y-%m-%d %H:%M")
+        if isNew:
+            obj.date = datetime.now()
+        obj.save()
 
-    for key in request.GET.keys():
-        if "association_" in key:
-            association = get_or_none(Association, key.split("_")[1])
-            ReportAssociation.objects.get_or_create(association=association, report=obj)
-
+        for key in request.GET.keys():
+            if "association_" in key:
+                association = get_or_none(Association, key.split("_")[1])
+                ReportAssociation.objects.get_or_create(association=association, report=obj)
+    except Exception as e:
+        print (show_exc(e))
     return render(request, "reports-list.html", {"item_list": get_reports(request)})
 
 @group_required("admins",)

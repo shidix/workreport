@@ -61,17 +61,29 @@
             </div>
         </div>
  
-        <div class="col-6 mt-3">
+        <div class="col-4 mt-3">
             <div class="greybox-sm p-1"> {% trans "Nombre asegurado" %}
                 <input type="text" class="form-control" id="name" name="name" value="{{obj.name}}"/>
             </div>
         </div>
-        <div class="col-6 mt-3">
+        <div class="col-4 mt-3">
             <div class="greybox-sm p-1"> {% trans "Teléfono asegurado" %}
                 <input type="text" class="form-control" id="phone" name="phone" value="{{obj.phone}}"/>
             </div>
         </div>
- 
+        <div class="col-4 mt-3">
+            <div class="greybox-sm p-1"> {% trans "Fecha de visita" %}
+                <div class="row">
+                    <div class="col-6">
+                        <input type="date" class="form-control" id="emp_date" name="emp_date" value="{{obj.emp_date|date:"Y-m-d"}}"/>
+                    </div>
+                    <div class="col-6">
+                        <input type="time" class="form-control" id="emp_time" name="emp_time" value="{{obj.emp_date|date:"H:i"}}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-12 mt-3">
             <div class="greybox-sm p-1"> {% trans "Técnico" %}
                 <select class="form-control" id="employee" name="employee">

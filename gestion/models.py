@@ -133,6 +133,7 @@ class Report(models.Model):
     code = models.CharField(max_length=50, verbose_name = _('Código'), default="")
     exp = models.CharField(max_length=50, verbose_name = _('Expediente'), default="")
     date = models.DateTimeField(default=datetime.datetime.now(), null=True, verbose_name=_('Fecha'))
+    emp_date = models.DateTimeField(default=datetime.datetime.now(), null=True, verbose_name=_('Fecha'))
     name = models.CharField(max_length=255, verbose_name = _('Nombre asegurado'), default="")
     phone = models.CharField(max_length=255, verbose_name = _('Teléfono de asegurado'), null=True, default='0000000000')
     address = models.TextField(verbose_name = _('Dirección'), null=True, default='')
@@ -150,6 +151,10 @@ class Report(models.Model):
     @property
     def local_date(self):
         return self.date.astimezone(tz.gettz("Atlantic/Canary"))
+
+    @property
+    def local_emp_date(self):
+        return self.emp_date.astimezone(tz.gettz("Atlantic/Canary"))
 
     def have_comp(self, comp):
         comp_list = [item.association for item in self.associations.all()]
